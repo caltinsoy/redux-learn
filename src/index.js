@@ -3,11 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import allReducers from './reducers';
+
+import { Provider } from 'react-redux';
+
+const store = createStore(allReducers
+  , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()) // on browser you can see your state with this param !
+
+//In nornally , createStore method takes just 1 reducer as a parameter , but the depend on your projects , it takes a number so that you can not use all reducers in createStore
+//We need to combined them and than merged to store ! we used index.js in reducers 
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
